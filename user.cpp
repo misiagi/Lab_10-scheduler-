@@ -33,11 +33,10 @@ void user::sim_process()
 	int i = 0;
 
 	delete phistory;
-	phistory = new history; //czyszczenie i tworzenie historii dla tej symulacji
+	phistory = new history; 
 
-	lastp_id = processvec.at(processvec.size()-1)->id; //poczatkowy stan (dzieki temu pierwszy element bedzie o indeksie 0)
-
-	for(int j=0; j<processvec.size(); j++) //obsluga historii
+	lastp_id = processvec.at(processvec.size()-1)->id; 
+	for(int j=0; j<processvec.size(); j++) 
 	{
 		phistory->add_id(processvec[j]->id);
 	}
@@ -47,20 +46,18 @@ void user::sim_process()
 		
 		for(int u=0; u<processvec.size(); u++)
 		{
-			processvec[u]->move_time = rand()%processvec[i]->max_move_time; // losowy czas kroku, maksymalna wartosc podana jako zmienna 'move_time' w klasie process
-			if(processvec[u]->move_time == 0)							  // nie moze byc zerem
-			{
+			processvec[u]->move_time = rand()%processvec[i]->max_move_time; 
+			if(processvec[u]->move_time == 0)							  
 				processvec[u]->move_time = 1;
 			}
-			//std::cout<<"proces "<<u<<": "<<processvec[u]->move_time<<std::endl;
+			
 		}
 
 
-		i = p_strategy->make_order(processvec, lastp_id); // wybor elementu do obslugi
+		i = p_strategy->make_order(processvec, lastp_id); 
 
-		lastp_id = processvec[i]->id;//zapamietanie elementu
-
-		//std::cout<<"I: "<<i<<std::endl;
+		lastp_id = processvec[i]->id;
+	
 
 		if(processvec[i]->moves_left > 0)
 		{
@@ -83,7 +80,6 @@ void user::sim_process()
 					}
 				}
 				
-					//obsluga historii
 					phistory->add_cycle();
 
 					char* temp = new char[processvec.size()];
@@ -102,7 +98,7 @@ void user::sim_process()
 				processvec[i]->state = 'Z';
 				exitstates++;
 			}
-			//std::cout<<"moves_left:"<<processvec[i]->moves_left<<std::endl;
+		
 
 		}
 		

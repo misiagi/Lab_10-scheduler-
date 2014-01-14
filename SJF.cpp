@@ -11,7 +11,7 @@ int SJF::make_order(std::vector<process*> processvec, int lastp_id)
 {
 	int min = 9999999;
 	int index=-1;
-	for(int i=0; i<processvec.size(); i++) //znalezienie procesu niebedacego ostatnim wykonywanym i posiadajacego minimalny czas kroku
+	for(int i=0; i<processvec.size(); i++)
 	{
 		if((processvec[i]->id != lastp_id) && (processvec[i]->state != 'Z'))
 		{
@@ -23,7 +23,7 @@ int SJF::make_order(std::vector<process*> processvec, int lastp_id)
 		}
 	}
 
-	if(index == -1) //zabezpieczenie gdy na koniec symulacji zostanie jeden proces z wiecej niz jednym ruchem
+	if(index == -1) 
 	{
 		for(int i=0; i<processvec.size(); i++)
 		{
